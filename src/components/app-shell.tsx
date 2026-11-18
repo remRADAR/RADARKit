@@ -1,18 +1,15 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import {
   Archive,
   ArrowUpRight,
   FileAudio,
   FolderKanban,
   LibraryBig,
-  Menu,
   Search,
   Share2,
   Sparkles,
   Waves,
 } from "lucide-react";
+import { MobileNav } from "./mobile-nav";
 
 const departments = [
   { id: "media-lab", name: "Media Lab", detail: "Intake, artwork and metadata", icon: Archive, status: "Ready" },
@@ -23,25 +20,13 @@ const departments = [
   { id: "asset-desk", name: "Asset Desk", detail: "Campaign files and export history", icon: FolderKanban, status: "Planned" },
 ];
 
+const mobileNavLinks = [
+  { href: "#top", name: "Overview" },
+  ...departments.map(({ id, name }) => ({ href: `#department-${id}`, name })),
+  { href: "#status", name: "Foundation status" },
+];
+
 export function AppShell() {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const firstNavLinkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    if (!isMobileNavOpen) return;
-
-    firstNavLinkRef.current?.focus();
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsMobileNavOpen(false);
-        menuButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isMobileNavOpen]);
-
   return (
     <main className="min-h-screen bg-paper text-ink">
       <header className="border-b-2 border-ink px-4 py-4 sm:px-6 lg:px-10">
@@ -55,29 +40,9 @@ export function AppShell() {
           <div className="hidden items-center gap-5 sm:flex">
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-ink-muted">RADARCharts by REM / Foundation preview</span>
           </div>
-          <button
-            ref={menuButtonRef}
-            type="button"
-            className="icon-button sm:hidden"
-            aria-label={isMobileNavOpen ? "Close navigation" : "Open navigation"}
-            aria-expanded={isMobileNavOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsMobileNavOpen((open) => !open)}
-          >
-            <Menu size={20} />
-          </button>
+          <MobileNav links={mobileNavLinks} />
         </div>
       </header>
-      {isMobileNavOpen && (
-        <nav id="mobile-navigation" aria-label="Foundation sections" className="border-b-2 border-ink bg-paper px-4 py-4 sm:hidden">
-          <p className="eyebrow mb-4">Jump to / Foundation sections</p>
-          <div className="grid gap-2">
-            <a ref={firstNavLinkRef} className="button button-secondary justify-between" href="#top" onClick={() => setIsMobileNavOpen(false)}>Overview <ArrowUpRight size={15} /></a>
-            {departments.map(({ id, name }) => <a key={id} className="button button-secondary justify-between" href={`#department-${id}`} onClick={() => setIsMobileNavOpen(false)}>{name} <ArrowUpRight size={15} /></a>)}
-            <a className="button button-secondary justify-between" href="#status" onClick={() => setIsMobileNavOpen(false)}>Foundation status <ArrowUpRight size={15} /></a>
-          </div>
-        </nav>
-      )}
 
       <section id="top" className="mx-auto grid max-w-[1440px] border-x-2 border-ink lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="border-b-2 border-ink px-5 py-12 sm:px-8 sm:py-16 lg:border-b-0 lg:border-r-2 lg:px-12 lg:py-24">
