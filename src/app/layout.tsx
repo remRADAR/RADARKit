@@ -3,7 +3,7 @@ import { Archivo, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const archivo = Archivo({ variable: "--font-grotesk", subsets: ["latin"], axes: ["wdth"] });
-const spaceMono = Space_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "700"] });
+const spaceMono = Space_Mono({ variable: "--font-space-mono", subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: { default: "RADARKit", template: "%s | RADARKit" },

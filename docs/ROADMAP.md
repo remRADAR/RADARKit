@@ -26,4 +26,4 @@ Add artist, song, release, credit, ISRC, release-date, and platform-link researc
 
 ## Release readiness
 
-Before production release, complete access control, audit logging, retention and deletion controls, accessibility review, mobile testing, performance checks, secret scanning, dependency review, and operational runbooks.
+Before production release, complete the server-side authentication gate, deny-by-default authorization, administrator/operator/read-only role boundaries, session expiry and revocation, audit logging, retention and deletion controls, accessibility review, mobile testing, performance checks, secret scanning, dependency review, and operational runbooks. No operational records, uploads, integrations, or private user data should be enabled before these gates pass.

@@ -9,4 +9,4 @@
 - [x] Deliver the required product, architecture, roadmap, security, development, platform-integration, and design-system documentation.
 - [x] Add public-repository safeguards including `.gitignore`, placeholder-only `.env.example`, rights boundaries, and secret-management guidance.
 - [ ] Implement Converter Lab MVP in a later phase after browser/server processing limits and storage strategy are validated.
-- [ ] Add admin-controlled authentication and authorization before operational data or uploads are introduced.
+- [ ] Add the mandatory server-side authentication gate, deny-by-default authorization, role boundaries, session expiry, revocation, and reauthentication before operational data, uploads, integrations, or private user data are introduced.

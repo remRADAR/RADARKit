@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import {
   Archive,
   ArrowUpRight,
@@ -12,15 +15,33 @@ import {
 } from "lucide-react";
 
 const departments = [
-  { name: "Media Lab", detail: "Intake, artwork and metadata", icon: Archive, status: "Ready" },
-  { name: "Playlist Studio", detail: "Import, match and sync", icon: LibraryBig, status: "Planned" },
-  { name: "Social Studio", detail: "Captions, hooks and presets", icon: Share2, status: "Planned" },
-  { name: "Converter Lab", detail: "Image and audio utilities", icon: FileAudio, status: "Next" },
-  { name: "Research Desk", detail: "Credits, links and release data", icon: Search, status: "Planned" },
-  { name: "Asset Desk", detail: "Campaign files and export history", icon: FolderKanban, status: "Planned" },
+  { id: "media-lab", name: "Media Lab", detail: "Intake, artwork and metadata", icon: Archive, status: "Ready" },
+  { id: "playlist-studio", name: "Playlist Studio", detail: "Import, match and sync", icon: LibraryBig, status: "Planned" },
+  { id: "social-studio", name: "Social Studio", detail: "Captions, hooks and presets", icon: Share2, status: "Planned" },
+  { id: "converter-lab", name: "Converter Lab", detail: "Image and audio utilities", icon: FileAudio, status: "Next" },
+  { id: "research-desk", name: "Research Desk", detail: "Credits, links and release data", icon: Search, status: "Planned" },
+  { id: "asset-desk", name: "Asset Desk", detail: "Campaign files and export history", icon: FolderKanban, status: "Planned" },
 ];
 
 export function AppShell() {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstNavLinkRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+
+    firstNavLinkRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileNavOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileNavOpen]);
+
   return (
     <main className="min-h-screen bg-paper text-ink">
       <header className="border-b-2 border-ink px-4 py-4 sm:px-6 lg:px-10">
@@ -32,12 +53,31 @@ export function AppShell() {
             <span className="font-display text-xl font-black uppercase tracking-[-0.06em]">RADAR<span className="text-flare">Kit</span></span>
           </a>
           <div className="hidden items-center gap-5 sm:flex">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-ink-muted">RADARCharts by REM / Internal workspace</span>
-            <button className="icon-button" aria-label="Open search"><Search size={17} /></button>
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-ink-muted">RADARCharts by REM / Foundation preview</span>
           </div>
-          <button className="icon-button sm:hidden" aria-label="Open navigation"><Menu size={20} /></button>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className="icon-button sm:hidden"
+            aria-label={isMobileNavOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMobileNavOpen((open) => !open)}
+          >
+            <Menu size={20} />
+          </button>
         </div>
       </header>
+      {isMobileNavOpen && (
+        <nav id="mobile-navigation" aria-label="Foundation sections" className="border-b-2 border-ink bg-paper px-4 py-4 sm:hidden">
+          <p className="eyebrow mb-4">Jump to / Foundation sections</p>
+          <div className="grid gap-2">
+            <a ref={firstNavLinkRef} className="button button-secondary justify-between" href="#top" onClick={() => setIsMobileNavOpen(false)}>Overview <ArrowUpRight size={15} /></a>
+            {departments.map(({ id, name }) => <a key={id} className="button button-secondary justify-between" href={`#department-${id}`} onClick={() => setIsMobileNavOpen(false)}>{name} <ArrowUpRight size={15} /></a>)}
+            <a className="button button-secondary justify-between" href="#status" onClick={() => setIsMobileNavOpen(false)}>Foundation status <ArrowUpRight size={15} /></a>
+          </div>
+        </nav>
+      )}
 
       <section id="top" className="mx-auto grid max-w-[1440px] border-x-2 border-ink lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="border-b-2 border-ink px-5 py-12 sm:px-8 sm:py-16 lg:border-b-0 lg:border-r-2 lg:px-12 lg:py-24">
@@ -68,8 +108,8 @@ export function AppShell() {
           <p className="max-w-xs font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-ink-muted">Each department has a clear job, a reusable component boundary and a path to independent development.</p>
         </div>
         <div className="department-grid grid sm:grid-cols-2 lg:grid-cols-3">
-          {departments.map(({ name, detail, icon: Icon, status }, index) => (
-            <article key={name} className="group border-b-2 border-ink p-5 last:border-b-0 sm:p-7">
+          {departments.map(({ id, name, detail, icon: Icon, status }, index) => (
+            <article id={`department-${id}`} key={id} className="group border-b-2 border-ink p-5 last:border-b-0 sm:p-7">
               <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center border-2 border-ink bg-paper group-hover:bg-flare"><Icon size={20} /></span><span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-muted">0{index + 1}</span></div>
               <h3 className="mt-12 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em]">{name}</h3>
               <p className="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-wide text-ink-muted">{detail}</p>

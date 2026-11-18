@@ -14,7 +14,9 @@ Cloudflare Pages or Workers are candidate hosting targets for the web and edge A
 
 ## Data and access
 
-Application records should be scoped to authenticated users or organizations. Authentication must be admin-controlled with no public self-registration unless approved. Authorization should be checked server-side for every operational record and file. Temporary files need an expiry policy, quota checks, audit events, and deletion controls.
+The current route is a foundation preview, not a protected workspace. Before operational use, authentication must be enforced server-side at the route boundary and authorization must deny by default for every future department route, API, record, and file. The first role boundary should support administrators, operators, and read-only collaborators. Sessions need idle and absolute expiry, revocation, logout, and reauthentication behavior. Cloudflare Access is a candidate perimeter provider, subject to evaluation against application-level roles and API checks.
+
+Application records should be scoped to authenticated users or organizations. Temporary files need an expiry policy, quota checks, audit events, and deletion controls. Authentication, authorization, and private-data handling are release gates, not follow-up hardening tasks.
 
 ## Integrations
 

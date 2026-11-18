@@ -6,7 +6,7 @@ RADARSite was inspected read-only at commit `d2186415da148dcd1a7058b56f1aff31525
 
 ## Verified tokens
 
-Typography uses `Archivo` from `next/font/google` as `--font-grotesk`, including its width axis, and `Space_Mono` as `--font-mono` with weights 400 and 700. The dark palette defines paper `#050505`, ink `#f7f7f2`, white flare `#ffffff`, and dark secondary `#171717`. The light theme defines paper `#f7f7f2`, ink `#050505`, green flare `#168a3a`, secondary `#e7e7df`, and muted foreground `#55554f`. RADARKit adopts the light operational surface as its default foundation view and preserves the verified semantic names.
+Typography uses `Archivo` from `next/font/google` as `--font-grotesk`, including its width axis, and `Space_Mono` as `--font-space-mono` with weights 400 and 700. RADARKit maps the Tailwind `font-mono` token to that distinct injected variable. The dark palette defines paper `#050505`, ink `#f7f7f2`, white flare `#ffffff`, and dark secondary `#171717`. The light theme defines paper `#f7f7f2`, ink `#050505`, green flare `#168a3a`, secondary `#e7e7df`, and muted foreground `#55554f`. RADARKit adopts the light operational surface as its default foundation view and preserves the verified semantic names.
 
 All radius tokens are `0px`. Motion uses `--ease-out: cubic-bezier(0.22, 1, 0.36, 1)`, `--ease-slam: cubic-bezier(0.16, 1, 0.3, 1)`, `--ease-in-out: cubic-bezier(0.76, 0, 0.24, 1)`, with fast/base/slow durations of `0.3s`, `0.6s`, and `1s`, plus a `260ms` theme transition. Responsive source patterns consistently use 768px as the mobile-to-desktop breakpoint, with 1024px and 1280px patterns used for larger layouts.
 
