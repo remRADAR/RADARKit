@@ -20,21 +20,29 @@ test("mobile navigation opens, focuses, closes with Escape, and targets departme
 
 test("department grid resets responsive borders at two and three columns", async ({ page, isMobile }) => {
   test.skip(isMobile, "Desktop grid geometry is tested on the desktop project.");
-  await page.setViewportSize({ width: 800, height: 900 });
   await page.goto("/");
   const cards = page.locator(".department-grid > article");
   await expect(cards).toHaveCount(6);
-  await expect(cards.nth(0)).toHaveCSS("border-right-width", "2px");
-  await expect(cards.nth(1)).toHaveCSS("border-right-width", "0px");
-  await expect(cards.nth(4)).toHaveCSS("border-bottom-width", "0px");
-  await expect(cards.nth(5)).toHaveCSS("border-bottom-width", "0px");
 
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/");
-  await expect(cards).toHaveCount(6);
-  await expect(cards.nth(2)).toHaveCSS("border-right-width", "0px");
-  await expect(cards.nth(5)).toHaveCSS("border-right-width", "0px");
-  await expect(cards.nth(4)).toHaveCSS("border-bottom-width", "0px");
+  for (const width of [640, 767, 768, 800, 1023]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(cards.nth(0)).toHaveCSS("border-right-width", "2px");
+    await expect(cards.nth(1)).toHaveCSS("border-right-width", "0px");
+    await expect(cards.nth(4)).toHaveCSS("border-bottom-width", "0px");
+    await expect(cards.nth(5)).toHaveCSS("border-bottom-width", "0px");
+  }
+
+  await page.setViewportSize({ width: 639, height: 900 });
+  await expect(cards.nth(0)).toHaveCSS("border-right-width", "0px");
+
+  for (const width of [1024, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(cards.nth(0)).toHaveCSS("border-right-width", "2px");
+    await expect(cards.nth(1)).toHaveCSS("border-right-width", "2px");
+    await expect(cards.nth(2)).toHaveCSS("border-right-width", "0px");
+    await expect(cards.nth(5)).toHaveCSS("border-right-width", "0px");
+    await expect(cards.nth(4)).toHaveCSS("border-bottom-width", "0px");
+  }
 });
 
 test("interactive controls expose visible focus and Space Mono resolves", async ({ page }) => {
