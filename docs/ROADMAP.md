@@ -10,7 +10,9 @@ Deliver browser-safe image and audio utilities first. Define file-size limits, s
 
 ## Social Studio
 
-Add structured caption, hook, call-to-action, hashtag, editorial, and campaign-preset workflows with reusable templates and private drafts.
+First slice: provide a browser-only, reusable 9:16 article-story template with local featured-image upload, title and excerpt inputs, full-bleed cover cropping, live preview, and 1080×1920 PNG export. This does not connect accounts or publish.
+
+Later: add structured caption, hook, call-to-action, hashtag, editorial, campaign-preset, and private-draft workflows. Any connected distribution remains behind the release-readiness and provider-authorization gates.
 
 ## Playlist Studio
 

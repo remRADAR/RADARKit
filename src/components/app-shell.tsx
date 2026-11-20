@@ -9,12 +9,13 @@ import {
   Sparkles,
   Waves,
 } from "lucide-react";
+import Link from "next/link";
 import { MobileNavigation } from "@/components/mobile-navigation";
 
 const departments = [
   { id: "media-lab", name: "Media Lab", detail: "Intake, artwork and metadata", icon: Archive, status: "Ready" },
   { id: "playlist-studio", name: "Playlist Studio", detail: "Import, match and sync", icon: LibraryBig, status: "Planned" },
-  { id: "social-studio", name: "Social Studio", detail: "Captions, hooks and presets", icon: Share2, status: "Planned" },
+  { id: "social-studio", name: "Social Studio", detail: "9:16 article story templates", icon: Share2, status: "Prototype" },
   { id: "converter-lab", name: "Converter Lab", detail: "Image and audio utilities", icon: FileAudio, status: "Next" },
   { id: "research-desk", name: "Research Desk", detail: "Credits, links and release data", icon: Search, status: "Planned" },
   { id: "asset-desk", name: "Asset Desk", detail: "Campaign files and export history", icon: FolderKanban, status: "Planned" },
@@ -34,7 +35,7 @@ export function AppShell() {
           <div className="hidden items-center gap-5 sm:flex">
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-ink-muted">RADARCharts by REM / Foundation preview</span>
           </div>
-          <MobileNavigation departments={departments.map(({ id, name }) => ({ id, name }))} />
+          <MobileNavigation departments={departments.map(({ id, name }) => ({ id, name, href: id === "social-studio" ? "/social-studio" : `#department-${id}` }))} />
         </div>
       </header>
 
@@ -72,7 +73,7 @@ export function AppShell() {
               <div className="flex items-start justify-between gap-4"><span className="grid size-11 place-items-center border-2 border-ink bg-paper group-hover:bg-flare"><Icon size={20} /></span><span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-muted">0{index + 1}</span></div>
               <h3 className="mt-12 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em]">{name}</h3>
               <p className="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-wide text-ink-muted">{detail}</p>
-              <div className="mt-10 flex items-center justify-between border-t-2 border-ink pt-3 font-mono text-[10px] font-bold uppercase tracking-widest"><span>{status}</span><ArrowUpRight size={15} /></div>
+              <div className="mt-10 flex items-center justify-between border-t-2 border-ink pt-3 font-mono text-[10px] font-bold uppercase tracking-widest"><span>{status}</span><span className="flex items-center gap-2">{id === "social-studio" && <Link className="underline underline-offset-4" href="/social-studio">Open studio</Link>}<ArrowUpRight size={15} /></span></div>
             </article>
           ))}
         </div>
