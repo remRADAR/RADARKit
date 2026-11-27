@@ -11,7 +11,7 @@ test("mobile navigation opens, focuses, closes with Escape, and targets departme
   await expect(page.getByRole("link", { name: "Overview" })).toBeFocused();
   for (const id of ["media-lab", "playlist-studio", "social-studio", "converter-lab", "research-desk", "asset-desk"]) {
     await expect(page.locator(`#department-${id}`)).toHaveCount(1);
-    await expect(page.getByRole("link", { name: new RegExp(id.replaceAll("-", " "), "i") })).toHaveAttribute("href", `#department-${id}`);
+    await expect(page.getByRole("link", { name: new RegExp(id.replaceAll("-", " "), "i") })).toHaveAttribute("href", id === "social-studio" ? "/social-studio" : `#department-${id}`);
   }
   await page.keyboard.press("Escape");
   await expect(menu).toHaveAttribute("aria-expanded", "false");

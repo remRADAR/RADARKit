@@ -1,5 +1,6 @@
 {
   "routes": [
-    { "path": "/", "title": "RADARKit workspace" }
+    { "path": "/", "title": "RADARKit workspace" },
+    { "path": "/social-studio", "title": "Social Studio" }
   ]
 }

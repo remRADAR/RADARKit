@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu } from "lucide-react";
 
-type DepartmentLink = { id: string; name: string };
+type DepartmentLink = { id: string; name: string; href: string };
 
 export function MobileNavigation({ departments }: { departments: DepartmentLink[] }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,7 @@ export function MobileNavigation({ departments }: { departments: DepartmentLink[
           <p className="eyebrow mb-4">Jump to / Foundation sections</p>
           <div className="grid gap-2">
             <a ref={firstLinkRef} className="button button-secondary justify-between" href="#top" onClick={() => setIsOpen(false)}>Overview <ArrowUpRight size={15} /></a>
-            {departments.map(({ id, name }) => <a key={id} className="button button-secondary justify-between" href={`#department-${id}`} onClick={() => setIsOpen(false)}>{name} <ArrowUpRight size={15} /></a>)}
+            {departments.map(({ id, name, href }) => <a key={id} className="button button-secondary justify-between" href={href} onClick={() => setIsOpen(false)}>{name} <ArrowUpRight size={15} /></a>)}
             <a className="button button-secondary justify-between" href="#status" onClick={() => setIsOpen(false)}>Foundation status <ArrowUpRight size={15} /></a>
           </div>
         </nav>

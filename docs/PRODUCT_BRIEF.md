@@ -12,7 +12,7 @@ RADARKit should be modular, rights-aware, mobile-usable, and operationally clear
 
 ## Departments
 
-Media Lab handles authorized intake, artwork, metadata preparation, and organization. Playlist Studio handles importing, matching, transfer, backup, and synchronization only where officially supported. Social Studio organizes captions, hooks, calls to action, hashtags, editorial content, and campaign presets. Converter Lab covers image and audio conversion, resizing, compression, trimming, and metadata management. Research Desk covers artist, song, release, credits, ISRC, release-date, and platform-link research. Asset Desk organizes campaign assets through folders, tags, naming conventions, metadata, and export history.
+Media Lab handles authorized intake, artwork, metadata preparation, and organization. Playlist Studio handles importing, matching, transfer, backup, and synchronization only where officially supported. Social Studio organizes captions, hooks, calls to action, hashtags, editorial content, and campaign presets. Its first browser-only slice also turns a local featured image, article title, and excerpt into a full-bleed 9:16 story asset with PNG export; it does not connect accounts or publish. Converter Lab covers image and audio conversion, resizing, compression, trimming, and metadata management. Research Desk covers artist, song, release, credits, ISRC, release-date, and platform-link research. Asset Desk organizes campaign assets through folders, tags, naming conventions, metadata, and export history.
 
 ## Scope boundaries
 

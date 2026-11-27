@@ -8,7 +8,7 @@ The foundation defines six modules: Media Lab, Playlist Studio, Social Studio, C
 
 ## Foundation status
 
-This repository currently contains the documented product and architecture foundation, a RADARSite-derived design system, a responsive application shell, and public-repository safeguards. It does not yet implement production authentication, media processing, external platform mutations, or live infrastructure.
+This repository contains the product and architecture foundation, a RADARSite-derived design system, a responsive application shell, and public-repository safeguards. It also includes a browser-only Social Studio prototype for composing and exporting a 1080×1920 story image from a local featured image, title, and excerpt. The prototype does not authenticate, bind to an article-publication event, upload, or publish to any platform. Production authentication, media-processing services, external platform mutations, and live infrastructure are not implemented.
 
 ## Technology direction
 
@@ -30,4 +30,4 @@ RADARKit must process only content the user owns, has permission to use, or may 
 
 ## Development
 
-See [Development](docs/DEVELOPMENT.md) for setup and commands. The next planned milestone is a rights-aware Converter Lab MVP with validated browser/server processing boundaries.
+See [Development](docs/DEVELOPMENT.md) for setup and commands. Social Studio is available at `/social-studio` for local preview and PNG export only; connected accounts, publication triggers, and RSS/social distribution remain future work. The next planned milestone is a rights-aware Converter Lab MVP with validated browser/server processing boundaries.
